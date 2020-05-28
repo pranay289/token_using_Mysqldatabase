@@ -13,7 +13,7 @@ public class Apiclient {
         if (retrofit==null)
         {
             retrofit=new Retrofit.Builder()
-                    .baseUrl("https://www.webrooper.com/androiddb/")
+                    .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
