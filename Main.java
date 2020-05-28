@@ -46,7 +46,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity{
 
     public static final int PERMISSION_CODE = 100;
-    String link = "https://www.youtube.com/watch?v=SRjyzvx_J_4";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,24 +92,4 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-    public void download(View view)
-    {
-        new YouTubeExtractor(this) {
-            @Override
-            public void onExtractionComplete(SparseArray<YtFile> ytFiles, VideoMeta vMeta) {
-                if (ytFiles != null) {
-                    int itag = 22;
-                    String downloadUrl = ytFiles.get(itag).getUrl();
-                    DownloadManager downloadmanager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-                    DownloadManager.Request request = new DownloadManager.Request(Uri.parse(downloadUrl));
-                    request.setTitle("My File");
-                    request.setDescription("Downloading");
-                    request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-                    request.setVisibleInDownloadsUi(false);
-                    request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS,"downloads");
-                    downloadmanager.enqueue(request);
-                }
-            }
-        }.extract(link, true, true);
-    }
 }
